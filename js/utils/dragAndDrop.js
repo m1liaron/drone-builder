@@ -1,8 +1,11 @@
+import {createDocumentElement} from "./utils.js";
 
 function dragAndDrop() {
-    const droneContainer = document.querySelector('.drone__container');
-    const partContainers = document.querySelectorAll('.part__container');
+    const workingArea = document.querySelector('.working__area');
     const partsContainer = document.querySelector('.parts__container');
+    const droneContainer = createDocumentElement('div', 'drone__container');
+    workingArea.appendChild(droneContainer);
+    const partContainers = document.querySelectorAll('.part__container');
 
     partContainers.forEach(part => {
         part.addEventListener('dragstart', () => {
