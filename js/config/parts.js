@@ -1,4 +1,4 @@
-import { Images } from "../../common/images/images";
+import { Images } from "../../common/images/images.js";
 
 const DroneParts = {
     frames: [

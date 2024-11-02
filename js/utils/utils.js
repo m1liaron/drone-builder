@@ -1,1 +1,1 @@
-export { createDocumentElement } from './createDocumentElement';
+export { createDocumentElement } from './createDocumentElement.js';
