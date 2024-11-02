@@ -94,6 +94,20 @@ function dragAndDrop() {
             }
         }
 
+        if(partType === 'flightController') {
+            if(!Object.keys(droneValues.controller).length) {
+                const controllerElement = createDocumentElement('div', 'controller');
+                controllerElement.style.backgroundImage = `url("${part__image.src}")`
+
+                droneContainer.appendChild(controllerElement);
+                draggedPart.remove();
+                draggedPart = controllerElement;
+                droneValues.controller = {
+                    name: draggedPart.id,
+                }
+            }
+        }
+
         function createMotor(position) {
             const motorElement = createDocumentElement('div', `propeller ${position}`);
             motorElement.style.backgroundImage = `url("${part__image.src}")`
