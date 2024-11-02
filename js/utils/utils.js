@@ -1,0 +1,1 @@
+export { createDocumentElement } from './createDocumentElement';
