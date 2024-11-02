@@ -4,11 +4,47 @@
 }
 
 .drone__container {
+    position: relative;
     margin: 0 auto;
     width: 40rem;
     height: 100%;
 }
 
 .drone__image-container {
-    width: 40rem;
+    width: 100%;
+    height: auto;
+}
+
+.propeller {
+    position: absolute;
+    width: 400px; /* Adjust size */
+    height: 400px; /* Adjust size */
+    background-image: url('../../assets/images/3 - motor 7 inches 2807 1300kv+7x4x3.PNG'); /* Use your propeller image */
+    background-size: cover;
+    background-position: center;
+}
+
+/* Position each propeller */
+.top-left {
+    top: 0;
+    left: 0;
+    transform: translate(-30%, -20%);
+}
+
+.top-right {
+    top: 0;
+    right: 0;
+    transform: translate(35%, -25%);
+}
+
+.bottom-left {
+    bottom: 0;
+    left: 0;
+    transform: translate(-35%, 20%);
+}
+
+.bottom-right {
+    bottom: 0;
+    right: 0;
+    transform: translate(35%, 25%);
 }

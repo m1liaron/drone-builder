@@ -26,21 +26,20 @@ function dragAndDrop() {
     droneContainer.addEventListener('drop', (e) => {
         e.preventDefault();
         const draggedPart  = document.querySelector('.part__container.dragging');
-        console.log(draggedPart)
         const part__image = draggedPart.querySelector('.part__image');
 
-        const isFrame = draggedPart.dataset.type === 'frame'
+        const partType = draggedPart.dataset.type;
 
-        if(!Object.keys(droneValues.frame).length && !isFrame) {
-            alert("Please add a frame first before adding other parts.");
-            return;
-        } else if(isFrame && Object.keys(droneValues.frame).length) {
+        if(partType !== 'frame') {
+            if(!Object.keys(droneValues.frame).length) {
+                alert("Please add a frame first before adding other parts.");
+                return;
+            }
+        } else {
             droneValues.frame = {
                 name: draggedPart.id,
-                type: draggedPart.type,
             }
         }
-
 
         if(draggedPart) {
             const droneContainerChild = droneContainer.children;
@@ -53,11 +52,6 @@ function dragAndDrop() {
             }
             droneContainer.innerHTML = '';
             droneContainer.appendChild(draggedPart);
-            if(isFrame) {
-                droneValues.frame = {
-                    name: draggedPart.id,
-                }
-            }
 
             part__image.classList.add('drone__image-container');
             draggedPart.classList.remove('dragging')
