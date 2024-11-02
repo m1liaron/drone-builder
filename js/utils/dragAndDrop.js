@@ -26,7 +26,7 @@ function dragAndDrop() {
 
     droneContainer.addEventListener('drop', (e) => {
         e.preventDefault();
-        const draggedPart  = document.querySelector('.part__container.dragging');
+        let draggedPart  = document.querySelector('.part__container.dragging');
         const part__image = draggedPart.querySelector('.part__image');
 
         const partType = draggedPart.dataset.type;
@@ -40,6 +40,7 @@ function dragAndDrop() {
             droneValues.frame = {
                 name: draggedPart.id,
             }
+
             droneContainer.innerHTML = '';
             droneContainer.appendChild(draggedPart);
             draggedPart.classList.remove('part__container');
@@ -79,10 +80,24 @@ function dragAndDrop() {
             }
         }
 
+        if(partType === 'battery') {
+            if(!Object.keys(droneValues.battery).length) {
+                const batteryElement = createDocumentElement('div', 'battery');
+                batteryElement.style.backgroundImage = `url("${part__image.src}")`
+
+                droneContainer.appendChild(batteryElement);
+                draggedPart.remove();
+                draggedPart = batteryElement;
+                droneValues.battery = {
+                    name: draggedPart.id,
+                }
+            }
+        }
+
         function createMotor(position) {
             const motorElement = createDocumentElement('div', `propeller ${position}`);
             motorElement.style.backgroundImage = `url("${part__image.src}")`
-            draggedPart.remove();
+            draggedPart.remove()    ;
             droneContainer.appendChild(motorElement);
         }
         draggedPart.classList.remove('dragging')
