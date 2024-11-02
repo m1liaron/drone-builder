@@ -17,12 +17,13 @@
 
 .parts__container {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    overflow-x: auto;
     gap: 20px;
+    overflow-x: auto;
+    padding: 10px 20px;
+    scroll-padding: 20px;
     width: 80rem;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 .part__container {
@@ -30,6 +31,7 @@
     border-radius: 10px;
     cursor: pointer;
     padding: 20px;
+    flex-shrink: 0;
 }
 
 .part__image {
