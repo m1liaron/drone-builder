@@ -1,0 +1,15 @@
+
+@import url('./layout.css');
+
+/* Import component-specific styles */
+@import url('./components/part-panel.css');
+@import url('./components/working-area.css');
+@import url('./components/feedback.css');
+@import url('./components/cost-display.css');
+
+/* Global styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
