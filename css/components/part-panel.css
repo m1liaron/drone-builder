@@ -1,0 +1,42 @@
+.parts__panel {
+    grid-row-start: 2;
+    grid-row-end: 3;
+
+    background: #c2c2c2;
+    color: white;
+}
+
+.parts__panel__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.parts__container {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 10px 20px;
+    scroll-padding: 20px;
+    width: 80rem;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+.part__container {
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 20px;
+    flex-shrink: 0;
+}
+
+.part__container.dragging {
+    opacity: 0.5;
+}
+
+.part__image {
+    width: 12rem;
+}
