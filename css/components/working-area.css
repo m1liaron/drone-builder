@@ -75,3 +75,16 @@
     transform: translate(-50%, -50%);
     z-index: -1;
 }
+
+.video__antenna {
+    position: absolute;
+    width: 440px; /* Adjust size */
+    height: 320px; /* Adjust size */
+    background-image: url('../../assets/images/9 -video antenna.PNG'); /* Replace with battery image */
+    background-size: cover;
+    background-position: center;
+    top: -4%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1
+}
