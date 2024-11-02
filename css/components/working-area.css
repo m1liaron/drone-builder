@@ -52,12 +52,12 @@
 
 .battery {
     position: absolute;
-    width: 340px; /* Adjust size */
-    height: 420px; /* Adjust size */
+    width: 340px;
+    height: 400px;
     background-image: url('../../assets/images/5 - battery 6s2p.PNG'); /* Replace with battery image */
     background-size: cover;
     background-position: center;
-    top: 45%;
+    top: 42%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 2;
@@ -65,8 +65,8 @@
 
 .controller {
     position: absolute;
-    width: 140px; /* Adjust size */
-    height: 120px; /* Adjust size */
+    width: 140px;
+    height: 120px;
     background-image: url('../../assets/images/7 - controller.PNG'); /* Replace with battery image */
     background-size: cover;
     background-position: center;
@@ -78,12 +78,25 @@
 
 .video__antenna {
     position: absolute;
-    width: 440px; /* Adjust size */
-    height: 320px; /* Adjust size */
+    width: 440px;
+    height: 320px;
     background-image: url('../../assets/images/9 -video antenna.PNG'); /* Replace with battery image */
     background-size: cover;
     background-position: center;
     top: -4%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1
+}
+
+.radio__module {
+    position: absolute;
+    width: 500px;
+    height: 320px;
+    background-image: url('../../assets/images/10 - radio module.PNG'); /* Replace with battery image */
+    background-size: cover;
+    background-position: center;
+    top: 29%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: -1
