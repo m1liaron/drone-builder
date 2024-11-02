@@ -2,6 +2,7 @@
 function dragAndDrop() {
     const droneContainer = document.querySelector('.drone__container');
     const partContainers = document.querySelectorAll('.part__container');
+    const partsContainer = document.querySelector('.parts__container');
 
     partContainers.forEach(part => {
         part.addEventListener('dragstart', () => {
@@ -25,8 +26,17 @@ function dragAndDrop() {
         const draggedPart  = document.querySelector('.part__container.dragging');
         const part__image = draggedPart.querySelector('.part__image');
         if(draggedPart) {
+            const droneContainerChild = droneContainer.children;
+            if(droneContainerChild.length >= 1) {
+                const currentPart = droneContainer.querySelector('.part__container');
+                currentPart.classList.remove('drone__container')
+                const currentPartImage = currentPart.querySelector('.part__image');
+                currentPartImage.classList.remove('drone__image-container')
+                partsContainer.appendChild(currentPart);
+            }
             droneContainer.innerHTML = '';
             droneContainer.appendChild(draggedPart);
+
             part__image.classList.add('drone__image-container');
             draggedPart.classList.remove('dragging')
         }
