@@ -22,4 +22,4 @@ function createDronePart(item) {
     return div;
 }
 
-export { createPartPanel };
+export { createPartPanel, createDronePart };

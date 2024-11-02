@@ -1,5 +1,6 @@
 import {createDocumentElement} from "./utils.js";
 import {droneValues} from "../constants/drone.js";
+import {createDronePart} from "../components/partPanel.js";
 
 function dragAndDrop() {
     const workingArea = document.querySelector('.working__area');
@@ -39,23 +40,52 @@ function dragAndDrop() {
             droneValues.frame = {
                 name: draggedPart.id,
             }
-        }
-
-        if(draggedPart) {
-            const droneContainerChild = droneContainer.children;
-            if(droneContainerChild.length >= 1) {
-                const currentPart = droneContainer.querySelector('.part__container');
-                currentPart.classList.remove('drone__container')
-                const currentPartImage = currentPart.querySelector('.part__image');
-                currentPartImage.classList.remove('drone__image-container')
-                partsContainer.appendChild(currentPart);
-            }
             droneContainer.innerHTML = '';
             droneContainer.appendChild(draggedPart);
+            draggedPart.classList.remove('part__container');
+            draggedPart.classList.add('frame__container')
 
             part__image.classList.add('drone__image-container');
-            draggedPart.classList.remove('dragging')
         }
+
+        if(partType === 'motor') {
+            if(!Object.keys(droneValues.motor).length) {
+                createMotor('top-left');
+                createMotor('top-right');
+                createMotor('bottom-left');
+                createMotor('bottom-right');
+                droneValues.motor = {
+                    name: draggedPart.id,
+                }
+            } else {
+                const currentFrame = document.querySelector('.frame__container');
+                const motor = droneContainer.querySelector('.propeller');
+                const motorElement = createDronePart({
+                    name: currentFrame.id,
+                    type: currentFrame.dataset.type,
+                    image: motor.style.backgroundImage.slice(5,-2)
+                });
+                partsContainer.appendChild(motorElement);
+
+                const motors = droneContainer.querySelectorAll('.propeller');
+                motors.forEach(motor => {
+                    motor.remove();
+                });
+
+                createMotor('top-left');
+                createMotor('top-right');
+                createMotor('bottom-left');
+                createMotor('bottom-right');
+            }
+        }
+
+        function createMotor(position) {
+            const motorElement = createDocumentElement('div', `propeller ${position}`);
+            motorElement.style.backgroundImage = `url("${part__image.src}")`
+            draggedPart.remove();
+            droneContainer.appendChild(motorElement);
+        }
+        draggedPart.classList.remove('dragging')
     })
 
 }
