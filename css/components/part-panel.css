@@ -4,5 +4,24 @@
 
     background: #403f3f;
     color: white;
-    padding: 50px;
+    padding: 20px;
+}
+
+.parts__panel__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    overflow-x: auto;
+    gap: 20px;
+}
+
+.part__container {
+    background-color: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.part__image {
+    width: 12rem;
 }
