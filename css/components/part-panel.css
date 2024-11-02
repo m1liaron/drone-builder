@@ -1,0 +1,8 @@
+.parts__panel {
+    grid-row-start: 2;
+    grid-row-end: 3;
+
+    background: #403f3f;
+    color: white;
+    padding: 50px;
+}
