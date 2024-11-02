@@ -1,6 +1,7 @@
 import {createDocumentElement} from "./utils.js";
 import {droneValues} from "../constants/drone.js";
 import {createDronePart} from "../components/partPanel.js";
+import {createCostPanel} from "../components/costPanel.js";
 
 function dragAndDrop() {
     const workingArea = document.querySelector('.working__area');
@@ -82,43 +83,43 @@ function dragAndDrop() {
 
         if(partType === 'battery') {
             if(!Object.keys(droneValues.battery).length) {
+                droneValues.battery = {
+                    name: draggedPart.id,
+                }
                 const batteryElement = createDocumentElement('div', 'battery');
                 batteryElement.style.backgroundImage = `url("${part__image.src}")`
 
                 droneContainer.appendChild(batteryElement);
                 draggedPart.remove();
                 draggedPart = batteryElement;
-                droneValues.battery = {
-                    name: draggedPart.id,
-                }
             }
         }
 
         if(partType === 'flightController') {
             if(!Object.keys(droneValues.controller).length) {
+                droneValues.controller = {
+                    name: draggedPart.id,
+                }
                 const controllerElement = createDocumentElement('div', 'controller');
                 controllerElement.style.backgroundImage = `url("${part__image.src}")`
 
                 droneContainer.appendChild(controllerElement);
                 draggedPart.remove();
                 draggedPart = controllerElement;
-                droneValues.controller = {
-                    name: draggedPart.id,
-                }
             }
         }
 
         if(partType === 'videoAntenna') {
             if(!Object.keys(droneValues.videoAntenna).length) {
+                droneValues.videoAntenna = {
+                    name: draggedPart.id,
+                }
                 const videoAntennaElement = createDocumentElement('div', 'video__antenna');
                 videoAntennaElement.style.backgroundImage = `url("${part__image.src}")`
 
                 droneContainer.appendChild(videoAntennaElement);
                 draggedPart.remove();
                 draggedPart = videoAntennaElement;
-                droneValues.videoAntenna = {
-                    name: draggedPart.id,
-                }
             }
         }
 
@@ -129,6 +130,7 @@ function dragAndDrop() {
             draggedPart.remove()    ;
             droneContainer.appendChild(motorElement);
         }
+        createCostPanel()
         draggedPart.classList.remove('dragging')
     })
 
