@@ -48,3 +48,15 @@
     right: 0;
     transform: translate(35%, 25%);
 }
+
+.battery {
+    position: absolute;
+    width: 340px; /* Adjust size */
+    height: 420px; /* Adjust size */
+    background-image: url('../../assets/images/5 - battery 6s2p.PNG'); /* Replace with battery image */
+    background-size: cover;
+    background-position: center;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
