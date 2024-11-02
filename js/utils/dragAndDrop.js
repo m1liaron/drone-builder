@@ -1,4 +1,5 @@
 import {createDocumentElement} from "./utils.js";
+import {droneValues} from "../constants/drone.js";
 
 function dragAndDrop() {
     const workingArea = document.querySelector('.working__area');
@@ -18,16 +19,29 @@ function dragAndDrop() {
 
     droneContainer.addEventListener('dragover', (e) => {
         e.preventDefault();
-        const part = document.querySelector('.part__container');
-        part.classList.add('drone__container')
-        droneContainer.appendChild(part);
+        const draggedPart  = document.querySelector('.part__container.dragging');
     })
 
 
     droneContainer.addEventListener('drop', (e) => {
         e.preventDefault();
         const draggedPart  = document.querySelector('.part__container.dragging');
+        console.log(draggedPart)
         const part__image = draggedPart.querySelector('.part__image');
+
+        const isFrame = draggedPart.dataset.type === 'frame'
+
+        if(!Object.keys(droneValues.frame).length && !isFrame) {
+            alert("Please add a frame first before adding other parts.");
+            return;
+        } else if(isFrame && Object.keys(droneValues.frame).length) {
+            droneValues.frame = {
+                name: draggedPart.id,
+                type: draggedPart.type,
+            }
+        }
+
+
         if(draggedPart) {
             const droneContainerChild = droneContainer.children;
             if(droneContainerChild.length >= 1) {
@@ -39,6 +53,11 @@ function dragAndDrop() {
             }
             droneContainer.innerHTML = '';
             droneContainer.appendChild(draggedPart);
+            if(isFrame) {
+                droneValues.frame = {
+                    name: draggedPart.id,
+                }
+            }
 
             part__image.classList.add('drone__image-container');
             draggedPart.classList.remove('dragging')

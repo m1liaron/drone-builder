@@ -15,7 +15,7 @@ function createPartPanel () {
 function createDronePart(item) {
     const div = createDocumentElement('div', 'part__container');
     div.id = item.name;
-    div.dataset.partType = item.type;
+    div.dataset.type = item.type;
     const img = createDocumentElement('img', 'part__image');
     img.src = item.image;
     div.appendChild(img);
