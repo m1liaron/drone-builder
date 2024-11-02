@@ -108,6 +108,21 @@ function dragAndDrop() {
             }
         }
 
+        if(partType === 'videoAntenna') {
+            if(!Object.keys(droneValues.videoAntenna).length) {
+                const videoAntennaElement = createDocumentElement('div', 'video__antenna');
+                videoAntennaElement.style.backgroundImage = `url("${part__image.src}")`
+
+                droneContainer.appendChild(videoAntennaElement);
+                draggedPart.remove();
+                draggedPart = videoAntennaElement;
+                droneValues.videoAntenna = {
+                    name: draggedPart.id,
+                }
+            }
+        }
+
+
         function createMotor(position) {
             const motorElement = createDocumentElement('div', `propeller ${position}`);
             motorElement.style.backgroundImage = `url("${part__image.src}")`
