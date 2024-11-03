@@ -28,26 +28,39 @@ function dragAndDrop() {
     droneContainer.addEventListener('drop', (e) => {
         e.preventDefault();
         let draggedPart  = document.querySelector('.part__container.dragging');
-        const part__image = draggedPart.querySelector('.part__image');
+        const partImage = draggedPart.querySelector('.part__image');
+        const currentFrame = droneContainer.querySelector('.frame__container');
+        const currentFrameImage = droneContainer.querySelector('.drone__image-container');
 
         const partType = draggedPart.dataset.type;
 
-        if(partType !== 'frame') {
+        if(partType === 'frame') {
+            if(Object.keys(droneValues.frame).length) { // If frame already exist
+
+                // return current frame to container
+                currentFrame.classList.remove('frame__container');
+                currentFrameImage.classList.remove('drone__image-container');
+                partsContainer.appendChild(currentFrame);
+
+                addFrameToDroneContainer();
+            } else {
+                addFrameToDroneContainer();
+            }
+        } else {
             if(!Object.keys(droneValues.frame).length) {
                 alert("Please add a frame first before adding other parts.");
                 return;
             }
-        } else {
+        }
+
+        function addFrameToDroneContainer() {
             droneValues.frame = {
                 name: draggedPart.id,
             }
 
-            droneContainer.innerHTML = '';
             droneContainer.appendChild(draggedPart);
-            draggedPart.classList.remove('part__container');
             draggedPart.classList.add('frame__container')
-
-            part__image.classList.add('drone__image-container');
+            partImage.classList.add('drone__image-container');
         }
 
         if(partType === 'motor') {
@@ -87,7 +100,7 @@ function dragAndDrop() {
                     name: draggedPart.id,
                 }
                 const batteryElement = createDocumentElement('div', 'battery');
-                batteryElement.style.backgroundImage = `url("${part__image.src}")`
+                batteryElement.style.backgroundImage = `url("${partImage.src}")`
 
                 droneContainer.appendChild(batteryElement);
                 draggedPart.remove();
@@ -101,7 +114,7 @@ function dragAndDrop() {
                     name: draggedPart.id,
                 }
                 const controllerElement = createDocumentElement('div', 'controller');
-                controllerElement.style.backgroundImage = `url("${part__image.src}")`
+                controllerElement.style.backgroundImage = `url("${partImage.src}")`
 
                 droneContainer.appendChild(controllerElement);
                 draggedPart.remove();
@@ -115,7 +128,7 @@ function dragAndDrop() {
                     name: draggedPart.id,
                 }
                 const videoAntennaElement = createDocumentElement('div', 'video__antenna');
-                videoAntennaElement.style.backgroundImage = `url("${part__image.src}")`
+                videoAntennaElement.style.backgroundImage = `url("${partImage.src}")`
 
                 droneContainer.appendChild(videoAntennaElement);
                 draggedPart.remove();
@@ -123,10 +136,9 @@ function dragAndDrop() {
             }
         }
 
-
         function createMotor(position) {
             const motorElement = createDocumentElement('div', `propeller ${position}`);
-            motorElement.style.backgroundImage = `url("${part__image.src}")`
+            motorElement.style.backgroundImage = `url("${partImage.src}")`
             draggedPart.remove()    ;
             droneContainer.appendChild(motorElement);
         }
