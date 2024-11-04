@@ -36,7 +36,7 @@ function dragAndDrop() {
             if(Object.keys(droneValues.frame).length) { // If frame already exist
                 returnCurrentPartToPanel('frame__container');
 
-                addPartToDroneContainer('frame', 'frame__container');
+                    addPartToDroneContainer('frame', 'frame__container');
             } else {
                 addPartToDroneContainer('frame', 'frame__container');
             }
@@ -77,13 +77,15 @@ function dragAndDrop() {
                 createMotor('bottom-right');
             }
         }
+        function createMotor(position) {
+            const motorElement = createDocumentElement('div', `propeller ${position}`);
+            motorElement.style.backgroundImage = `url("${partImage.src}")`
+            draggedPart.remove()    ;
+            droneContainer.appendChild(motorElement);
+        }
 
         if(partType === 'battery') {
             if(!Object.keys(droneValues.battery).length) {
-                droneValues.battery = {
-                    name: draggedPart.id,
-                }
-
                 addPartToDroneContainer('battery', 'battery');
             } else {
                 returnCurrentPartToPanel('battery');
@@ -92,35 +94,13 @@ function dragAndDrop() {
             }
         }
 
-        function returnCurrentPartToPanel(className) {
-            const currentPart = droneContainer.querySelector(`.${className}`);
-            const currentPartImage = droneContainer.querySelector(`.${className} img`);
-            currentPart.classList.remove('battery');
-            currentPartImage.classList.remove('drone__image-container');
-            partsContainer.appendChild(currentPart);
-        }
-
-        function addPartToDroneContainer(type, partClassName) {
-            droneValues[type] = {
-                name: draggedPart.id,
-            }
-
-            droneContainer.appendChild(draggedPart);
-            draggedPart.classList.add(partClassName)
-            partImage.classList.add('drone__image-container');
-        }
-
-        if(partType === 'flightController') {
+        if(partType === 'controller') {
             if(!Object.keys(droneValues.controller).length) {
-                droneValues.controller = {
-                    name: draggedPart.id,
-                }
-                const controllerElement = createDocumentElement('div', 'controller');
-                controllerElement.style.backgroundImage = `url("${partImage.src}")`
+                addPartToDroneContainer('controller', 'controller');
+            } else {
+                returnCurrentPartToPanel('controller');
 
-                droneContainer.appendChild(controllerElement);
-                draggedPart.remove();
-                draggedPart = controllerElement;
+                addPartToDroneContainer('controller', 'controller');
             }
         }
 
@@ -138,12 +118,25 @@ function dragAndDrop() {
             }
         }
 
-        function createMotor(position) {
-            const motorElement = createDocumentElement('div', `propeller ${position}`);
-            motorElement.style.backgroundImage = `url("${partImage.src}")`
-            draggedPart.remove()    ;
-            droneContainer.appendChild(motorElement);
+
+        function returnCurrentPartToPanel(className) {
+            const currentPart = droneContainer.querySelector(`.${className}`);
+            const currentPartImage = droneContainer.querySelector(`.${className} img`);
+            currentPart.classList.remove(className);
+            currentPartImage.classList.remove('drone__image-container');
+            partsContainer.appendChild(currentPart);
         }
+
+        function addPartToDroneContainer(type, partClassName) {
+            droneValues[type] = {
+                name: draggedPart.id,
+            }
+
+            droneContainer.appendChild(draggedPart);
+            draggedPart.classList.add(partClassName)
+            partImage.classList.add('drone__image-container');
+        }
+
         createCostPanel()
         draggedPart.classList.remove('dragging')
     })

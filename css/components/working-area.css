@@ -65,7 +65,6 @@
     position: absolute;
     width: 140px;
     height: 120px;
-    background-image: url('../../assets/images/7 - controller.PNG'); /* Replace with battery image */
     background-size: cover;
     background-position: center;
     top: 50%;
@@ -78,7 +77,6 @@
     position: absolute;
     width: 440px;
     height: 320px;
-    background-image: url('../../assets/images/9 -video antenna.PNG'); /* Replace with battery image */
     background-size: cover;
     background-position: center;
     top: -4%;
@@ -91,7 +89,6 @@
     position: absolute;
     width: 500px;
     height: 320px;
-    background-image: url('../../assets/images/10 - radio module.PNG'); /* Replace with battery image */
     background-size: cover;
     background-position: center;
     top: 29%;
