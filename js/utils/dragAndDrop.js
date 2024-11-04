@@ -124,6 +124,16 @@ function dragAndDrop() {
             }
         }
 
+        if(partType === 'camera') {
+            if(!Object.keys(droneValues.camera).length) {
+                addPartToDroneContainer('camera', 'camera');
+            } else {
+                returnCurrentPartToPanel('camera');
+
+                addPartToDroneContainer('camera', 'camera');
+            }
+        }
+
 
         function returnCurrentPartToPanel(className) {
             const currentPart = droneContainer.querySelector(`.${className}`);

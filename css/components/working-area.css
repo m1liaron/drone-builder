@@ -96,3 +96,15 @@
     transform: translate(-50%, -50%);
     z-index: -1
 }
+
+.camera {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    background-size: cover;
+    background-position: center;
+    top: 42%;
+    left: 50%;
+    transform: translate(-50%, 30%);
+    z-index: 5;
+}
