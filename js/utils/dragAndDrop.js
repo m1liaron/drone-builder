@@ -29,18 +29,12 @@ function dragAndDrop() {
         e.preventDefault();
         let draggedPart  = document.querySelector('.part__container.dragging');
         const partImage = draggedPart.querySelector('.part__image');
-        const currentFrame = droneContainer.querySelector('.frame__container');
-        const currentFrameImage = droneContainer.querySelector('.drone__image-container');
 
         const partType = draggedPart.dataset.type;
 
         if(partType === 'frame') {
             if(Object.keys(droneValues.frame).length) { // If frame already exist
-
-                // return current frame to container
-                currentFrame.classList.remove('frame__container');
-                currentFrameImage.classList.remove('drone__image-container');
-                partsContainer.appendChild(currentFrame);
+                returnCurrentPartToPanel('frame__container');
 
                 addPartToDroneContainer('frame', 'frame__container');
             } else {
@@ -92,14 +86,18 @@ function dragAndDrop() {
 
                 addPartToDroneContainer('battery', 'battery');
             } else {
-                const currentBattery = droneContainer.querySelector('.battery');
-                const currentBatteryImage = droneContainer.querySelector('.battery img');
-                currentBattery.classList.remove('battery');
-                currentBatteryImage.classList.remove('drone__image-container');
-                partsContainer.appendChild(currentBattery);
+                returnCurrentPartToPanel('battery');
 
                 addPartToDroneContainer('battery', 'battery');
             }
+        }
+
+        function returnCurrentPartToPanel(className) {
+            const currentPart = droneContainer.querySelector(`.${className}`);
+            const currentPartImage = droneContainer.querySelector(`.${className} img`);
+            currentPart.classList.remove('battery');
+            currentPartImage.classList.remove('drone__image-container');
+            partsContainer.appendChild(currentPart);
         }
 
         function addPartToDroneContainer(type, partClassName) {
