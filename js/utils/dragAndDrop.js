@@ -114,6 +114,17 @@ function dragAndDrop() {
             }
         }
 
+        if(partType === 'radioModule') {
+            if(!Object.keys(droneValues.radioModule).length) {
+                addPartToDroneContainer('radioModule', 'radio__module');
+            } else {
+                returnCurrentPartToPanel('radio__module');
+
+                addPartToDroneContainer('radioModule', 'radio__module');
+            }
+        }
+
+
         function returnCurrentPartToPanel(className) {
             const currentPart = droneContainer.querySelector(`.${className}`);
             const currentPartImage = droneContainer.querySelector(`.${className} img`);
