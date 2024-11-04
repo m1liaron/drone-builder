@@ -42,25 +42,15 @@ function dragAndDrop() {
                 currentFrameImage.classList.remove('drone__image-container');
                 partsContainer.appendChild(currentFrame);
 
-                addFrameToDroneContainer();
+                addPartToDroneContainer('frame', 'frame__container');
             } else {
-                addFrameToDroneContainer();
+                addPartToDroneContainer('frame', 'frame__container');
             }
         } else {
             if(!Object.keys(droneValues.frame).length) {
                 alert("Please add a frame first before adding other parts.");
                 return;
             }
-        }
-
-        function addFrameToDroneContainer() {
-            droneValues.frame = {
-                name: draggedPart.id,
-            }
-
-            droneContainer.appendChild(draggedPart);
-            draggedPart.classList.add('frame__container')
-            partImage.classList.add('drone__image-container');
         }
 
         if(partType === 'motor') {
@@ -99,13 +89,27 @@ function dragAndDrop() {
                 droneValues.battery = {
                     name: draggedPart.id,
                 }
-                const batteryElement = createDocumentElement('div', 'battery');
-                batteryElement.style.backgroundImage = `url("${partImage.src}")`
 
-                droneContainer.appendChild(batteryElement);
-                draggedPart.remove();
-                draggedPart = batteryElement;
+                addPartToDroneContainer('battery', 'battery');
+            } else {
+                const currentBattery = droneContainer.querySelector('.battery');
+                const currentBatteryImage = droneContainer.querySelector('.battery img');
+                currentBattery.classList.remove('battery');
+                currentBatteryImage.classList.remove('drone__image-container');
+                partsContainer.appendChild(currentBattery);
+
+                addPartToDroneContainer('battery', 'battery');
             }
+        }
+
+        function addPartToDroneContainer(type, partClassName) {
+            droneValues[type] = {
+                name: draggedPart.id,
+            }
+
+            droneContainer.appendChild(draggedPart);
+            draggedPart.classList.add(partClassName)
+            partImage.classList.add('drone__image-container');
         }
 
         if(partType === 'flightController') {

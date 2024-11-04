@@ -20,7 +20,6 @@
     position: absolute;
     width: 400px; /* Adjust size */
     height: 400px; /* Adjust size */
-    /*background-image: url('../../assets/images/3 - motor 7 inches 2807 1300kv+7x4x3.PNG'); !* Use your propeller image *!*/
     background-size: cover;
     background-position: center;
 }
@@ -54,7 +53,6 @@
     position: absolute;
     width: 340px;
     height: 400px;
-    background-image: url('../../assets/images/5 - battery 6s2p.PNG'); /* Replace with battery image */
     background-size: cover;
     background-position: center;
     top: 42%;
