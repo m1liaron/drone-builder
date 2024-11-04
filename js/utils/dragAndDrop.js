@@ -106,18 +106,13 @@ function dragAndDrop() {
 
         if(partType === 'videoAntenna') {
             if(!Object.keys(droneValues.videoAntenna).length) {
-                droneValues.videoAntenna = {
-                    name: draggedPart.id,
-                }
-                const videoAntennaElement = createDocumentElement('div', 'video__antenna');
-                videoAntennaElement.style.backgroundImage = `url("${partImage.src}")`
+                addPartToDroneContainer('videoAntenna', 'video__antenna');
+            } else {
+                returnCurrentPartToPanel('video__antenna');
 
-                droneContainer.appendChild(videoAntennaElement);
-                draggedPart.remove();
-                draggedPart = videoAntennaElement;
+                addPartToDroneContainer('videoAntenna', 'video__antenna');
             }
         }
-
 
         function returnCurrentPartToPanel(className) {
             const currentPart = droneContainer.querySelector(`.${className}`);
