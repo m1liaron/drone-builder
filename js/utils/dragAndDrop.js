@@ -6,9 +6,14 @@ import {createCostPanel} from "../components/costPanel.js";
 function dragAndDrop() {
     const workingArea = document.querySelector('.working__area');
     const partsContainer = document.querySelector('.parts__container');
-    const droneContainer = createDocumentElement('div', 'drone__container');
-    workingArea.appendChild(droneContainer);
+    const droneContainer = createDroneContainer();
     const partContainers = document.querySelectorAll('.part__container');
+
+    function createDroneContainer() {
+        const container = createDocumentElement('div', 'drone__container');
+        workingArea.appendChild(container);
+        return container;
+    }
 
     partContainers.forEach(part => {
         part.addEventListener('dragstart', () => {
@@ -27,13 +32,13 @@ function dragAndDrop() {
 
     droneContainer.addEventListener('drop', (e) => {
         e.preventDefault();
-        let draggedPart  = document.querySelector('.part__container.dragging');
+        const draggedPart  = document.querySelector('.part__container.dragging');
         const partImage = draggedPart.querySelector('.part__image');
 
         const partType = draggedPart.dataset.type;
 
         if(partType === 'frame') {
-            if(Object.keys(droneValues.frame).length) { // If frame already exist
+            if(Object.keys(droneValues.frame).length) {
                 returnCurrentPartToPanel('frame__container');
 
                     addPartToDroneContainer('frame', 'frame__container');
