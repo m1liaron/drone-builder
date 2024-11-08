@@ -6,9 +6,14 @@ import {createCostPanel} from "../components/costPanel.js";
 function dragAndDrop() {
     const workingArea = document.querySelector('.working__area');
     const partsContainer = document.querySelector('.parts__container');
-    const droneContainer = createDocumentElement('div', 'drone__container');
-    workingArea.appendChild(droneContainer);
+    const droneContainer = createDroneContainer();
     const partContainers = document.querySelectorAll('.part__container');
+
+    function createDroneContainer() {
+        const container = createDocumentElement('div', 'drone__container');
+        workingArea.appendChild(container);
+        return container;
+    }
 
     partContainers.forEach(part => {
         part.addEventListener('dragstart', () => {
@@ -27,27 +32,24 @@ function dragAndDrop() {
 
     droneContainer.addEventListener('drop', (e) => {
         e.preventDefault();
-        let draggedPart  = document.querySelector('.part__container.dragging');
-        const part__image = draggedPart.querySelector('.part__image');
+        const draggedPart  = document.querySelector('.part__container.dragging');
+        const partImage = draggedPart.querySelector('.part__image');
 
         const partType = draggedPart.dataset.type;
 
-        if(partType !== 'frame') {
+        if(partType === 'frame') {
+            if(Object.keys(droneValues.frame).length) {
+                returnCurrentPartToPanel('frame__container');
+
+                    addPartToDroneContainer('frame', 'frame__container');
+            } else {
+                addPartToDroneContainer('frame', 'frame__container');
+            }
+        } else {
             if(!Object.keys(droneValues.frame).length) {
                 alert("Please add a frame first before adding other parts.");
                 return;
             }
-        } else {
-            droneValues.frame = {
-                name: draggedPart.id,
-            }
-
-            droneContainer.innerHTML = '';
-            droneContainer.appendChild(draggedPart);
-            draggedPart.classList.remove('part__container');
-            draggedPart.classList.add('frame__container')
-
-            part__image.classList.add('drone__image-container');
         }
 
         if(partType === 'motor') {
@@ -80,56 +82,82 @@ function dragAndDrop() {
                 createMotor('bottom-right');
             }
         }
+        function createMotor(position) {
+            const motorElement = createDocumentElement('div', `propeller ${position}`);
+            motorElement.style.backgroundImage = `url("${partImage.src}")`
+            draggedPart.remove()    ;
+            droneContainer.appendChild(motorElement);
+        }
 
         if(partType === 'battery') {
             if(!Object.keys(droneValues.battery).length) {
-                droneValues.battery = {
-                    name: draggedPart.id,
-                }
-                const batteryElement = createDocumentElement('div', 'battery');
-                batteryElement.style.backgroundImage = `url("${part__image.src}")`
+                addPartToDroneContainer('battery', 'battery');
+            } else {
+                returnCurrentPartToPanel('battery');
 
-                droneContainer.appendChild(batteryElement);
-                draggedPart.remove();
-                draggedPart = batteryElement;
+                addPartToDroneContainer('battery', 'battery');
             }
         }
 
-        if(partType === 'flightController') {
+        if(partType === 'controller') {
             if(!Object.keys(droneValues.controller).length) {
-                droneValues.controller = {
-                    name: draggedPart.id,
-                }
-                const controllerElement = createDocumentElement('div', 'controller');
-                controllerElement.style.backgroundImage = `url("${part__image.src}")`
+                addPartToDroneContainer('controller', 'controller');
+            } else {
+                returnCurrentPartToPanel('controller');
 
-                droneContainer.appendChild(controllerElement);
-                draggedPart.remove();
-                draggedPart = controllerElement;
+                addPartToDroneContainer('controller', 'controller');
             }
         }
 
         if(partType === 'videoAntenna') {
             if(!Object.keys(droneValues.videoAntenna).length) {
-                droneValues.videoAntenna = {
-                    name: draggedPart.id,
-                }
-                const videoAntennaElement = createDocumentElement('div', 'video__antenna');
-                videoAntennaElement.style.backgroundImage = `url("${part__image.src}")`
+                addPartToDroneContainer('videoAntenna', 'video__antenna');
+            } else {
+                returnCurrentPartToPanel('video__antenna');
 
-                droneContainer.appendChild(videoAntennaElement);
-                draggedPart.remove();
-                draggedPart = videoAntennaElement;
+                addPartToDroneContainer('videoAntenna', 'video__antenna');
+            }
+        }
+
+        if(partType === 'radioModule') {
+            if(!Object.keys(droneValues.radioModule).length) {
+                addPartToDroneContainer('radioModule', 'radio__module');
+            } else {
+                returnCurrentPartToPanel('radio__module');
+
+                addPartToDroneContainer('radioModule', 'radio__module');
+            }
+        }
+
+        if(partType === 'camera') {
+            if(!Object.keys(droneValues.camera).length) {
+                addPartToDroneContainer('camera', 'camera');
+            } else {
+                returnCurrentPartToPanel('camera');
+
+                addPartToDroneContainer('camera', 'camera');
             }
         }
 
 
-        function createMotor(position) {
-            const motorElement = createDocumentElement('div', `propeller ${position}`);
-            motorElement.style.backgroundImage = `url("${part__image.src}")`
-            draggedPart.remove()    ;
-            droneContainer.appendChild(motorElement);
+        function returnCurrentPartToPanel(className) {
+            const currentPart = droneContainer.querySelector(`.${className}`);
+            const currentPartImage = droneContainer.querySelector(`.${className} img`);
+            currentPart.classList.remove(className);
+            currentPartImage.classList.remove('drone__image-container');
+            partsContainer.appendChild(currentPart);
         }
+
+        function addPartToDroneContainer(type, partClassName) {
+            droneValues[type] = {
+                name: draggedPart.id,
+            }
+
+            droneContainer.appendChild(draggedPart);
+            draggedPart.classList.add(partClassName)
+            partImage.classList.add('drone__image-container');
+        }
+
         createCostPanel()
         draggedPart.classList.remove('dragging')
     })
