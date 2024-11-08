@@ -62,14 +62,14 @@ const DroneParts = [
         price: 50,
         compatibility: "7\" and 10\"",
         image: Images.Controller,
-        type: "flightController"
+        type: "controller"
     },
     {
         name: "Mamba F405 MK2",
         price: 70,
         compatibility: "7\" and 10\"",
         image: Images.Controller,
-        type: "flightController"
+        type: "controller"
     },
     {
         name: "Caddx Ratel Pro",
